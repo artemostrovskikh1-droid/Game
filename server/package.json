@@ -2,8 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+    "main": "server.js",
+   "test": "echo \"E"
   "scripts": {
+    "start": "node server.js",
+    "postinstall": "npm rebuild sqlite3",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
