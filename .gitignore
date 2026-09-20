@@ -1,0 +1,22 @@
+﻿# Зависимости
+node_modules/
+
+# Секреты
+.env
+.env.local
+
+# База данных
+*.db
+*.db-journal
+
+# Логи
+*.log
+npm-debug.log*
+
+# Системные
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
