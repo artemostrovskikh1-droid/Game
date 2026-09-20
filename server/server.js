@@ -6,6 +6,7 @@ const cors = require('cors');
 const path = require('path');
 
 require('dotenv').config();
+const { initDatabase } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -69,14 +70,22 @@ app.use((err, req, res, next) => {
 // ============================================================
 // ЗАПУСК
 // ============================================================
-app.listen(PORT, () => {
-    console.log('');
-    console.log('════════════════════════════════════════');
-    console.log('  🎮 ORTACAR Server запущен');
-    console.log('════════════════════════════════════════');
-    console.log(`  🌐 http://localhost:${PORT}`);
-    console.log(`  📁 Статика: ${clientPath}`);
-    console.log(`  🔐 JWT_SECRET: ${process.env.JWT_SECRET ? 'установлен ✓' : 'НЕ УСТАНОВЛЕН ✗'}`);
-    console.log('════════════════════════════════════════');
-    console.log('');
-});
+    initDatabase()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log('');
+            console.log('========================================');
+            console.log('  🎮 ORTACAR Server запущен');
+            console.log('========================================');
+            console.log(`  🌐 http://localhost:${PORT}`);
+            console.log(`  📁 Статика: ${clientPath}`);
+            console.log(`  🔐 JWT_SECRET: ${process.env.JWT_SECRET ? 'установлен ✓' : 'НЕ УСТАНОВЛЕН ✗'}`);
+            console.log(`  🗄️  БД: PostgreSQL`);
+            console.log('========================================');
+            console.log('');
+        });
+    })
+    .catch((err) => {
+        console.error('❌ Ошибка инициализации БД:', err);
+        process.exit(1);
+    });
