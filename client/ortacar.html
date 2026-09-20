@@ -1963,42 +1963,124 @@
         <div class="overlay" id="profileOverlay">
             <div class="overlay-title" data-i18n="profile.title">👤 ПРОФИЛЬ</div>
             <div class="cyber-profile">
-                <div class="prof-top">
-                    <div class="prof-avatar-wrapper">
-                        <div class="prof-avatar-ring-1"></div>
-                        <div class="prof-avatar-ring-2"></div>
-                        <div class="prof-avatar" id="profileAvatar">
-                            <span id="profileAvatarEmoji">🚗</span>
-                        </div>
-                    </div>
-                    <div class="prof-info">
-                        <div class="prof-nick-row">
-                            <div class="prof-nick" id="profileNickDisplay">— Без ника —</div>
-                            <div class="prof-status-badge" data-i18n="profile.online">Онлайн</div>
-                        </div>
-                        <div class="prof-id" id="profileId">ID: #000000</div>
-                        <div class="prof-coins-row">
-                            <div class="prof-stat coins"><span class="p-stat-icon">🪙</span><span id="profileCoins">0</span></div>
-                            <div class="prof-stat best"><span class="p-stat-icon">🏆</span><span id="profileBest">0</span></div>
-                            <div class="prof-stat total"><span class="p-stat-icon">⭐</span><span id="profileTotal">0</span></div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="cyber-section-title" data-i18n="profile.nickSection">Имя игрока</div>
-                <div class="cyber-nick-input-row">
-                    <input type="text" class="cyber-nick-input" id="profileInput"
-                           placeholder="Введи ник..." maxlength="16" autocomplete="off" data-i18n-placeholder="profile.nickPlaceholder">
-                    <button class="cyber-save-btn" id="profileSaveBtn" data-i18n="profile.save">Сохранить</button>
-                </div>
-                <div class="cyber-msg" id="profileMsg"></div>
+    <!-- Табы -->
+    <div class="profile-tabs">
+        <button class="profile-tab active" data-profile-tab="account">
+            <span class="tab-icon">🔐</span>
+            <span class="tab-label">Аккаунт</span>
+        </button>
+        <button class="profile-tab" data-profile-tab="stats">
+            <span class="tab-icon">📊</span>
+            <span class="tab-label">Статистика</span>
+        </button>
+        <button class="profile-tab" data-profile-tab="customize">
+            <span class="tab-icon">🎨</span>
+            <span class="tab-label">Внешность</span>
+        </button>
+    </div>
 
-                <div class="cyber-section-title" data-i18n="profile.avatar">Аватар</div>
-                <div class="cyber-avatar-grid" id="avatarGrid"></div>
+    <!-- ===== ВКЛАДКА: АККАУНТ ===== -->
+    <div class="profile-panel active" data-profile-panel="account">
 
-                <div class="cyber-section-title" data-i18n="profile.ring">Рамка профиля</div>
-                <div class="cyber-ring-grid" id="ringGrid"></div>
+        <!-- Статус -->
+        <div class="account-status" id="accountStatus">
+            <div class="account-status-icon">👤</div>
+            <div class="account-status-text">
+                <div class="account-status-label" data-i18n="account.notLoggedIn">Не авторизован</div>
+                <div class="account-status-hint" data-i18n="account.hint">Войди или создай аккаунт, чтобы сохранять прогресс в облаке</div>
             </div>
+        </div>
+
+        <!-- Форма входа / регистрации -->
+        <div class="account-form" id="accountForm">
+            <div class="account-tabs">
+                <button class="account-tab active" data-account-tab="login" data-i18n="account.tabLogin">Вход</button>
+                <button class="account-tab" data-account-tab="register" data-i18n="account.tabRegister">Регистрация</button>
+            </div>
+
+            <div class="account-inputs">
+                <input type="text" 
+                       class="account-input" 
+                       id="accountNickInput"
+                       placeholder="Ник (2-16 символов)" 
+                       maxlength="16" 
+                       autocomplete="username"
+                       data-i18n-placeholder="account.nickPlaceholder">
+                <input type="password" 
+                       class="account-input" 
+                       id="accountPassInput"
+                       placeholder="Пароль (минимум 4 символа)" 
+                       maxlength="64" 
+                       autocomplete="current-password"
+                       data-i18n-placeholder="account.passPlaceholder">
+            </div>
+
+            <div class="account-msg" id="accountMsg"></div>
+
+            <button class="account-submit" id="accountSubmitBtn" data-i18n="account.submitLogin">Войти</button>
+        </div>
+
+        <!-- Кнопки для авторизованного -->
+        <div class="account-actions" id="accountActions" style="display:none;">
+            <button class="account-action-btn" id="accountSaveBtn">💾 Сохранить прогресс</button>
+            <button class="account-action-btn" id="accountLoadBtn">📥 Загрузить прогресс</button>
+            <button class="account-action-btn danger" id="accountLogoutBtn">🚪 Выйти из аккаунта</button>
+        </div>
+
+    </div>
+
+    <!-- ===== ВКЛАДКА: СТАТИСТИКА ===== -->
+    <div class="profile-panel" data-profile-panel="stats">
+
+        <div class="stats-grid">
+            <div class="stats-card">
+                <div class="stats-card-icon">🪙</div>
+                <div class="stats-card-value" id="statCoins">0</div>
+                <div class="stats-card-label">Монеты</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-card-icon">🏆</div>
+                <div class="stats-card-value" id="statBest">0</div>
+                <div class="stats-card-label">Рекорд</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-card-icon">⭐</div>
+                <div class="stats-card-value" id="statTotal">0</div>
+                <div class="stats-card-label">Всего очков</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-card-icon">🚗</div>
+                <div class="stats-card-value" id="statSkins">0</div>
+                <div class="stats-card-label">Машин</div>
+            </div>
+        </div>
+
+        <div class="cyber-section-title">Профиль игрока</div>
+        <div class="prof-id" id="profileIdDisplay">ID: #000000</div>
+
+    </div>
+
+    <!-- ===== ВКЛАДКА: ВНЕШНОСТЬ ===== -->
+    <div class="profile-panel" data-profile-panel="customize">
+
+        <div class="cyber-section-title" data-i18n="profile.nickSection">Имя игрока</div>
+        <div class="cyber-nick-input-row">
+            <input type="text" class="cyber-nick-input" id="profileInput"
+                   placeholder="Введи ник..." maxlength="16" autocomplete="off" data-i18n-placeholder="profile.nickPlaceholder">
+            <button class="cyber-save-btn" id="profileSaveBtn" data-i18n="profile.save">Сохранить</button>
+        </div>
+        <div class="cyber-msg" id="profileMsg"></div>
+
+        <div class="cyber-section-title" data-i18n="profile.avatar">Аватар</div>
+        <div class="cyber-avatar-grid" id="avatarGrid"></div>
+
+        <div class="cyber-section-title" data-i18n="profile.ring">Рамка профиля</div>
+        <div class="cyber-ring-grid" id="ringGrid"></div>
+
+    </div>
+
+</div>
             <button class="close-btn" id="closeProfileBtn" data-i18n="common.close">Закрыть</button>
         </div>
 
@@ -2770,12 +2852,6 @@
     const profileInput = document.getElementById('profileInput');
     const profileSaveBtn = document.getElementById('profileSaveBtn');
     const profileMsg = document.getElementById('profileMsg');
-    const profileNickDisplay = document.getElementById('profileNickDisplay');
-    const profileId = document.getElementById('profileId');
-    const profileCoins = document.getElementById('profileCoins');
-    const profileBest = document.getElementById('profileBest');
-    const profileTotal = document.getElementById('profileTotal');
-    const profileAvatar = document.getElementById('profileAvatar');
     const avatarGrid = document.getElementById('avatarGrid');
     const ringGrid = document.getElementById('ringGrid');
     const friendsOverlay = document.getElementById('friendsOverlay');
@@ -3414,59 +3490,80 @@
     closeFriendsBtn.addEventListener('click', closeAllOverlays);
 
     // ===== ПРОФИЛЬ =====
-    function renderProfile() {
-        profileNickDisplay.textContent = player.nick ? player.nick : (currentLang === 'ru' ? '— Без ника —' : '— No nickname —');
-        profileId.textContent = 'ID: #' + String(playerId).padStart(6, '0');
-        profileCoins.textContent = Math.floor(coins).toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
-        profileBest.textContent = bestScore.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
-        profileTotal.textContent = totalScore.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
+        function renderProfile() {
+        // Обновляем ник в поле ввода
+        const input = document.getElementById('profileInput');
+        if (input) input.value = player.nick || '';
 
-        const ring = getCurrentRing();
-        profileAvatar.className = 'prof-avatar' + (ring.cls ? ' ' + ring.cls : '');
-        if (ring.id === 'rainbow') {
-            profileAvatar.innerHTML = `<div class="avatar-inner">${player.avatar}</div>`;
-        } else {
-            profileAvatar.innerHTML = `<span>${player.avatar}</span>`;
+        // Обновляем статистику
+        const statCoins = document.getElementById('statCoins');
+        const statBest = document.getElementById('statBest');
+        const statTotal = document.getElementById('statTotal');
+        const statSkins = document.getElementById('statSkins');
+
+        if (statCoins) statCoins.textContent = Math.floor(coins).toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
+        if (statBest) statBest.textContent = bestScore.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
+        if (statTotal) statTotal.textContent = totalScore.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
+        if (statSkins) statSkins.textContent = SKINS.filter(s => s.owned).length;
+
+        // ID
+        const idDisplay = document.getElementById('profileIdDisplay');
+        if (idDisplay) idDisplay.textContent = 'ID: #' + String(playerId).padStart(6, '0');
+
+        // Аватары
+        const avatarGridEl = document.getElementById('avatarGrid');
+        if (avatarGridEl) {
+            avatarGridEl.innerHTML = '';
+            AVATARS.forEach(av => {
+                const el = document.createElement('div');
+                el.className = 'cyber-avatar-opt' + (av === player.avatar ? ' selected' : '');
+                el.textContent = av;
+                el.addEventListener('click', () => {
+                    player.avatar = av;
+                    saveProgress();
+                    renderProfile();
+                });
+                avatarGridEl.appendChild(el);
+            });
         }
 
-        avatarGrid.innerHTML = '';
-        AVATARS.forEach(av => {
-            const el = document.createElement('div');
-            el.className = 'cyber-avatar-opt' + (av === player.avatar ? ' selected' : '');
-            el.textContent = av;
-            el.addEventListener('click', () => { player.avatar = av; saveProgress(); renderProfile(); });
-            avatarGrid.appendChild(el);
-        });
-
-        ringGrid.innerHTML = '';
-        RINGS.forEach(r => {
-            const el = document.createElement('div');
-            el.className = 'cyber-ring-opt' + (r.id === player.ringId ? ' selected' : '') + (r.owned ? ' owned' : '');
-            let priceText = '';
-            if (!r.owned) priceText = `<div class="cyber-ring-price">${r.price.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US')} 🪙</div>`;
-            else priceText = `<div class="cyber-ring-price owned">✓ ${currentLang === 'ru' ? 'Куплено' : 'Owned'}</div>`;
-            el.innerHTML = `
-                <div class="cyber-ring-preview ${r.cls.replace('ring-','')}">${player.avatar}</div>
-                <div class="cyber-ring-name">${r.name}</div>
-                ${priceText}
-            `;
-            el.addEventListener('click', () => {
-                if (r.owned) {
-                    player.ringId = r.id;
-                    saveProgress(); renderProfile();
-                } else {
-                    if (coins >= r.price) {
-                        coins -= r.price; r.owned = true; player.ringId = r.id;
-                        updateCoinDisplay(); saveProgress(); renderProfile();
+        // Рамки
+        const ringGridEl = document.getElementById('ringGrid');
+        if (ringGridEl) {
+            ringGridEl.innerHTML = '';
+            RINGS.forEach(r => {
+                const el = document.createElement('div');
+                el.className = 'cyber-ring-opt' + (r.id === player.ringId ? ' selected' : '') + (r.owned ? ' owned' : '');
+                let priceText = '';
+                if (!r.owned) priceText = `<div class="cyber-ring-price">${r.price.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US')} 🪙</div>`;
+                else priceText = `<div class="cyber-ring-price owned">✓ ${currentLang === 'ru' ? 'Куплено' : 'Owned'}</div>`;
+                el.innerHTML = `
+                    <div class="cyber-ring-preview ${r.cls.replace('ring-','')}">${player.avatar}</div>
+                    <div class="cyber-ring-name">${r.name}</div>
+                    ${priceText}
+                `;
+                el.addEventListener('click', () => {
+                    if (r.owned) {
+                        player.ringId = r.id;
+                        saveProgress();
+                        renderProfile();
                     } else {
-                        profileMsg.style.color = '#ff4477';
-                        profileMsg.textContent = t('msg.noCoins') + (r.price - coins).toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US') + ' 🪙';
-                        setTimeout(() => { profileMsg.textContent = ''; }, 2500);
+                        if (coins >= r.price) {
+                            coins -= r.price; r.owned = true; player.ringId = r.id;
+                            updateCoinDisplay(); saveProgress(); renderProfile();
+                        } else {
+                            const profileMsgEl = document.getElementById('profileMsg');
+                            if (profileMsgEl) {
+                                profileMsgEl.style.color = '#ff4477';
+                                profileMsgEl.textContent = t('msg.noCoins') + (r.price - coins).toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US') + ' 🪙';
+                                setTimeout(() => { profileMsgEl.textContent = ''; }, 2500);
+                            }
+                        }
                     }
-                }
+                });
+                ringGridEl.appendChild(el);
             });
-            ringGrid.appendChild(el);
-        });
+        }
     }
 
     profileSaveBtn.addEventListener('click', saveNick);
@@ -5313,6 +5410,30 @@
         closeBtn.addEventListener('click', close);
 
         return { open, close, refreshState };
+    })();
+    // ============================================================
+    // ===== ПЕРЕКЛЮЧЕНИЕ ТАБОВ ПРОФИЛЯ =====
+    // ============================================================
+    (function initProfileTabs() {
+        const tabs = document.querySelectorAll('.profile-tab');
+        const panels = document.querySelectorAll('.profile-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.profileTab;
+
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                panels.forEach(p => {
+                    if (p.dataset.profilePanel === target) {
+                        p.classList.add('active');
+                    } else {
+                        p.classList.remove('active');
+                    }
+                });
+            });
+        });
     })();
     // Сохранить прогресс при закрытии страницы
     window.addEventListener('beforeunload', () => {
